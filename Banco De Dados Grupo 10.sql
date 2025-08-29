@@ -18,13 +18,15 @@ CREATE TABLE cliente (
     idCliente INT PRIMARY KEY AUTO_INCREMENT,
     empresa VARCHAR(50) NOT NULL UNIQUE,
     telefone VARCHAR(13) NOT NULL UNIQUE,
-    senha VARCHAR(20) NOT NULL UNIQUE,
+    senha VARCHAR(20) NOT NULL,
         CONSTRAINT chkSeguranca
             CHECK (senha NOT LIKE '%123%'),   -- Idéia de preocupação com segurança
     cnpj CHAR(18)NOT NULL UNIQUE,
-    dtCadastro DATE,
+    dtCadastro DATE NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE
 );
+
+DESC cliente;
 
 INSERT INTO cliente VALUES
 (default,'Fish Company','5511987614433','huwiefh124','10.245.633/0001-13','2025-11-16','fishcompany@gmail.com'),
@@ -33,15 +35,25 @@ INSERT INTO cliente VALUES
 (default,'Kamehame Peixes','5511922224000','n4op8912','46.668.258/0001-61','2023-12-30','kamehamepeixes@gmail.com'),
 (default,'Truta Olimpica','5511956619000','fbiup238','70.035.407/0001-30','2024-01-01','trutaolimpica@gmail.com');
 
+SELECT * FROM cliente;
+
 SELECT concat(senha ,' ', email) AS login FROM cliente
 	WHERE dtCadastro > '2023-05-27' ORDER BY empresa DESC;
+    
+SELECT empresa AS 'Nome da empresa',
+	CASE
+    WHEN telefone NOT LIKE '55_1%' THEN 'Não é de São Paulo - SP'
+    ELSE 'É de São Paulo - SP'
+    END
+    AS 'Tanques localizados em:'
+    FROM cliente;
 
 -- AS TABELAS Login E Cliente são relacionais, e a tabela Login só recebe os dados para validar o login e senha. (Chave estrangeira)
 CREATE TABLE login (
     idCliente INT PRIMARY KEY AUTO_INCREMENT,
     empresa VARCHAR(50) NOT NULL UNIQUE,
     telefone VARCHAR(13) NOT NULL UNIQUE,
-    senha VARCHAR(20) NOT NULL UNIQUE,
+    senha VARCHAR(20) NOT NULL,
     cnpj CHAR(18)NOT NULL UNIQUE,
     email VARCHAR(50) NOT NULL UNIQUE
 );
@@ -53,10 +65,12 @@ insert into login values
 	(default,'Filhos da Truta' ,'5511987614433' ,'vb3894' ,'66.800.473/0001-81' ,'filhosdatruta@gmail.com'),
 	(default,'Kamehame Peixes' ,'5511987614433' ,'n4op8912' ,'46.668.258/0001-61' ,'kamehamepeixes@gmail.com'),
 	(default,'Truta Olimpica' ,'5511987614433' ,'fbiup238' ,'70.035.407/0001-30', 'trutaolimpica@gmail.com');
-*/
+
 
 SELECT concat(senha ,' ', email) AS login FROM cliente
 	WHERE dtCadastro > '2023-05-27' ORDER BY empresa DESC;
+    
+*/
 
 CREATE TABLE coletaArduino (
     idSensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -66,6 +80,8 @@ CREATE TABLE coletaArduino (
     temperatura DECIMAL(4,1)
     );
 
+DESC coletaArduino;
+
 INSERT INTO coletaArduino VALUES
 	(default,'Fish Company', 1,'2025-08-10 11:30:40', 29),
 	(default,'Peixes Co', 1,'2025-07-10 13:40:59', 19.5),
@@ -73,8 +89,16 @@ INSERT INTO coletaArduino VALUES
 	(default,'Kamehame Peixes', 1,'2023-01-15 22:22:16', 18.9),
 	(default,'Truta Olimpica', 1,'2021-08-30 23:10:31', 16);
 
-SELECT concat(tanque ,' ', temperatura) AS medidor FROM coletaArduino
+SELECT * FROM coletaArduino;
+
+SELECT CONCAT(tanque ,' ', temperatura) AS medidor FROM coletaArduino
 	WHERE dtColeta > '2023-05-27' ORDER BY temperatura DESC;
+    
+SELECT empresa AS 'Nome da empresa',
+		tanque AS 'Número do tanque',
+		CONCAT('ATENÇÃO!!! A TEMPERATURA DO TANQUE NÚMERO ', tanque, ' ESTÁ ACIMA DO IDEAL (', temperatura, '°C).') AS Aviso
+        FROM coletaArduino
+        WHERE temperatura > 20;
     
 CREATE TABLE tanque (
 	idTanque INT PRIMARY KEY AUTO_INCREMENT,
@@ -91,6 +115,8 @@ CREATE TABLE tanque (
 	periodoFertil BOOLEAN
 );
 
+DESC tanque;
+
 INSERT INTO tanque VALUES 
 	(default, 'Fish Company', 1, 29, 10, 15, 20, 100, 'cultivo', true),
 	(default, 'Peixes Co', 1, 19.5, 10, 15, 20, 30, 'cultivo', false),
@@ -98,5 +124,13 @@ INSERT INTO tanque VALUES
 	(default, 'Kamehame Peixes', 1, 18.9, 15, 16, 17, 300, 'crescimento', false),
 	(default, 'Truta Olimpica', 1, 16, 15, 16, 17, 400, 'crescimento', false);
     
+    SELECT * FROM tanque;
+    
     SELECT * FROM tanque
 		WHERE temperaturaMedia < 17 AND temperaturaMedia > 15;
+        
+	SELECT empresa AS 'Nome da empresa',
+			CONCAT('As trutas do tanque número ', tanque, ' estão no período fértil. Mantenha a temperatura por volta dos 10°C.') AS Aviso
+            FROM tanque
+            WHERE periodoFertil = true
+            ORDER BY empresa;
