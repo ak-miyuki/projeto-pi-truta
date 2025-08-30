@@ -34,7 +34,6 @@ INSERT INTO cliente VALUES
 	(default,'Filhos da Truta','551892761100','vb3894','66.800.473/0001-81','2021-05-27','filhosdatruta@gmail.com'),
 	(default,'Kamehame Peixes','5511922224000','n4op8912','46.668.258/0001-61','2023-12-30','kamehamepeixes@gmail.com'),
 	(default,'Truta Olimpica','5511956619000','fbiup238','70.035.407/0001-30','2024-01-01','trutaolimpica@gmail.com'),
-	
 	(default,'Como pode um peixe','98572-7465','kdmjs874','86.852.658/0001-80','2025-08-03','peixevivo@outlook.com'),
     (default,'Shark Powder','99325-7863','kfoei987c','52.687.852/0001-95','2025-06-19','sharkpowder@outlook.com')
 ;
@@ -53,6 +52,31 @@ SELECT empresa AS 'Nome da empresa',
     END
     AS 'Tanques localizados em:'
     FROM cliente;
+
+
+-- pedro
+SELECT empresa AS 'Nome da empresa',
+	CASE
+		WHEN dtCadastro <> '2024-01-01' THEN CONCAT(empresa, ' Login: ', cnpj)
+		ELSE CONCAT(empresa, ' Contato: ', email)
+    END AS InformacaoCliente
+FROM cliente ORDER BY dtCadastro DESC;
+
+SELECT empresa AS 'Nome da empresa',
+ date_format(dtCadastro, '%d/%m/%Y %h:%m:%s') AS DataCadastro FROM cliente;
+
+SELECT empresa AS 'Nome da Empresa',
+	CASE
+		WHEN dtCadastro >= '2025-01-01' THEN 'Cliente Novo'
+        WHEN dtCadastro BETWEEN '2023-01-01' AND '2024-12-31' THEN 'Cliente Recente'
+        WHEN dtCadastro < '2023-01-01' THEN 'Cliente Antigo'
+        ELSE 'Cadastro não identificado'
+    END AS ClassificacaoCadastro
+FROM cliente;
+-- pedro
+
+
+
 
 -- AS TABELAS Login E Cliente são relacionais, e a tabela Login só recebe os dados para validar o login e senha. (Chave estrangeira)
 CREATE TABLE login (
@@ -79,11 +103,27 @@ insert into login values
 
 SELECT concat(senha ,' ', email) AS login FROM cliente
 	WHERE dtCadastro > '2023-05-27' ORDER BY empresa DESC;
-    
 
 
 SELECT email FROM login 
 	WHERE email ='gmail';
+    
+    
+-- pedro
+SELECT empresa AS 'Nome da empresa',
+ date_format(dtCadastro, '%d/%m/%Y %h:%m:%s') AS DataCadastro FROM cliente;
+
+SELECT empresa AS 'Nome da Empresa',
+	CASE
+		WHEN dtCadastro >= '2025-01-01' THEN 'Cliente Novo'
+        WHEN dtCadastro BETWEEN '2023-01-01' AND '2024-12-31' THEN 'Cliente Recente'
+        WHEN dtCadastro < '2023-01-01' THEN 'Cliente Antigo'
+        ELSE 'Cadastro não identificado'
+    END AS ClassificacaoCadastro
+FROM cliente;
+-- pedro
+
+
 
 CREATE TABLE coletaArduino (
     idSensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -129,7 +169,7 @@ CREATE TABLE tanque (
 	temperaturaMedia DECIMAL(3,1) NOT NULL,
 	temperaturaIdealMaxima DECIMAL(3,1) NOT NULL,
 	qtdTruta INT NOT NULL, 
-	faseTruta VARCHAR(30)
+	faseTruta VARCHAR(30),
 			CONSTRAINT chkFase
 				CHECK(faseTruta IN('crescimento','cultivo')),
 	periodoFertil BOOLEAN
@@ -160,10 +200,26 @@ INSERT INTO tanque VALUES
             FROM tanque
             WHERE periodoFertil = true
             ORDER BY empresa;
-            
+
+-- Pedro
 SELECT empresa, tanque, faseTruta as 'Fase',
  CASE
  WHEN periodoFertil = 'true' THEN 'Seus peixes estão em período fértil'
  ELSE 'Seus peixes não estão em período fértil'
  END AS 'Período fértil'
  FROM tanque ORDER BY periodoFertil ASC;
+ 
+ SELECT * FROM tanque
+	WHERE faseTruta = "cultivo";
+
+SELECT empresa AS 'Nome da empresa',
+	CONCAT('As trutas do tanque número ', tanque, ' não estão no período fértil. Não precisa alterar a temperatura da água') AS Aviso
+	FROM tanque
+	WHERE periodoFertil = false
+	ORDER BY empresa;
+
+SELECT empresa AS 'Nome da empresa', faseTruta as 'fase de crescimento' FROM tanque
+	WHERE periodoFertil = false
+	AND faseTruta = 'cultivo'
+	ORDER BY empresa;
+-- Pedro
