@@ -29,11 +29,11 @@ CREATE TABLE cliente (
 DESC cliente;
 
 INSERT INTO cliente VALUES
-(default,'Fish Company','5511987614433','huwiefh124','10.245.633/0001-13','2025-11-16','fishcompany@gmail.com'),
-(default,'Peixes Co','5513987610000','renoh3389','78.687.100/0001-25','2023-07-17','peixesco@gmail.com'),
-(default,'Filhos da Truta','551892761100','vb3894','66.800.473/0001-81','2021-05-27','filhosdatruta@gmail.com'),
-(default,'Kamehame Peixes','5511922224000','n4op8912','46.668.258/0001-61','2023-12-30','kamehamepeixes@gmail.com'),
-(default,'Truta Olimpica','5511956619000','fbiup238','70.035.407/0001-30','2024-01-01','trutaolimpica@gmail.com');
+	(default,'Fish Company','5511987614433','huwiefh124','10.245.633/0001-13','2025-11-16','fishcompany@gmail.com'),
+	(default,'Peixes Co','5513987610000','renoh3389','78.687.100/0001-25','2023-07-17','peixesco@gmail.com'),
+	(default,'Filhos da Truta','551892761100','vb3894','66.800.473/0001-81','2021-05-27','filhosdatruta@gmail.com'),
+	(default,'Kamehame Peixes','5511922224000','n4op8912','46.668.258/0001-61','2023-12-30','kamehamepeixes@gmail.com'),
+	(default,'Truta Olimpica','5511956619000','fbiup238','70.035.407/0001-30','2024-01-01','trutaolimpica@gmail.com');
 
 SELECT * FROM cliente;
 
@@ -128,6 +128,9 @@ INSERT INTO tanque VALUES
     
     SELECT * FROM tanque
 		WHERE temperaturaMedia < 17 AND temperaturaMedia > 15;
+        
+	SELECT * FROM tanque
+		WHERE faseTruta = "crescimento";
         
 	SELECT empresa AS 'Nome da empresa',
 			CONCAT('As trutas do tanque número ', tanque, ' estão no período fértil. Mantenha a temperatura por volta dos 10°C.') AS Aviso
