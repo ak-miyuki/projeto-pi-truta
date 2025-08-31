@@ -1,6 +1,8 @@
 /*
+---------- GRUPO 10 ----------
+
 Andrei Sato	04252015
-Andreia Miyuki Kubota 04252015
+Andreia Miyuki Kubota 04252014
 Deivid Duarte Oliveira 04252007
 João  Ricardo Jortieke Junior 04252002
 Maria Maia 04252011
@@ -94,7 +96,6 @@ insert into login values
 	(default,'Filhos da Truta' ,'97659-7323' ,'vb3894' ,'66.800.473/0001-81' ,'filhosdatruta@gmail.com'),
 	(default,'Kamehame Peixes' ,'99256-1461' ,'n4op8912' ,'46.668.258/0001-61' ,'kamehamepeixes@gmail.com'),
 	(default,'Truta Olimpica' ,'99287-6462' ,'fbiup238' ,'70.035.407/0001-30', 'trutaolimpica@gmail.com'),
-    
     (default,'Como pode um peixe','98572-7465','kdmjs874','86.852.658/0001-80','peixevivo@outlook.com'),
     (default,'Shark Powder','99325-7863','kfoei987c','52.687.852/0001-95','sharkpowder@outlook.com')
 ;
@@ -151,6 +152,7 @@ SELECT empresa AS 'Nome da empresa',
         FROM coletaArduino
         WHERE temperatura > 20;
         -- empresa: tanque X precisa de atenção. temperatura em x graus
+        
 SELECT tanque AS 'Número do tanque',
 	CONCAT(empresa,': O tanque ',tanque,' precisa de atenção. Temperatura em ',temperatura,' graus.') AS aviso
     FROM coletaArduino
@@ -226,8 +228,6 @@ show 	tables;
 desc cliente;
 
 select * from cliente;
-
-alter table cliente rename column telefone to telefone;
 
 update cliente set email = 'emailnovoteste@email.com'
 	where idCliente = 1;
