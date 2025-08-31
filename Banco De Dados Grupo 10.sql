@@ -20,7 +20,7 @@ CREATE TABLE cliente (
     telefone VARCHAR(13) NOT NULL UNIQUE,
     senha VARCHAR(20) NOT NULL,
         CONSTRAINT chkSeguranca
-            CHECK (senha NOT LIKE '%123%'),   -- Idéia de preocupação com segurança
+            CHECK (senha NOT LIKE '%123%'),   -- Príncipio de representação de conceitos de segurança relacionado à senha. 
     cnpj CHAR(18)NOT NULL UNIQUE,
     dtCadastro DATE NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE
@@ -53,8 +53,9 @@ SELECT empresa AS 'Nome da empresa',
     AS 'Tanques localizados em:'
     FROM cliente;
 
+INSERT INTO cliente VALUES
+	(default,'Peixes','5511987614324','senha123','10.245.633/1000-12','2025-11-16','empresadopeixe@gmail.com'); -- Exemplo de violação da regra de segurança aplicada. 
 
--- pedro
 SELECT empresa AS 'Nome da empresa',
 	CASE
 		WHEN dtCadastro <> '2024-01-01' THEN CONCAT(empresa, ' Login: ', cnpj)
@@ -73,8 +74,6 @@ SELECT empresa AS 'Nome da Empresa',
         ELSE 'Cadastro não identificado'
     END AS ClassificacaoCadastro
 FROM cliente;
--- pedro
-
 
 
 
@@ -108,8 +107,6 @@ SELECT concat(senha ,' ', email) AS login FROM cliente
 SELECT email FROM login 
 	WHERE email ='gmail';
     
-    
--- pedro
 SELECT empresa AS 'Nome da empresa',
  date_format(dtCadastro, '%d/%m/%Y %h:%m:%s') AS DataCadastro FROM cliente;
 
@@ -121,7 +118,6 @@ SELECT empresa AS 'Nome da Empresa',
         ELSE 'Cadastro não identificado'
     END AS ClassificacaoCadastro
 FROM cliente;
--- pedro
 
 
 
@@ -201,7 +197,7 @@ INSERT INTO tanque VALUES
             WHERE periodoFertil = true
             ORDER BY empresa;
 
--- Pedro
+
 SELECT empresa, tanque, faseTruta as 'Fase',
  CASE
  WHEN periodoFertil = 'true' THEN 'Seus peixes estão em período fértil'
@@ -222,4 +218,3 @@ SELECT empresa AS 'Nome da empresa', faseTruta as 'fase de crescimento' FROM tan
 	WHERE periodoFertil = false
 	AND faseTruta = 'cultivo'
 	ORDER BY empresa;
--- Pedro
