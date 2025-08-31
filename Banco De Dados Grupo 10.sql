@@ -218,3 +218,41 @@ SELECT empresa AS 'Nome da empresa', faseTruta as 'fase de crescimento' FROM tan
 	WHERE periodoFertil = false
 	AND faseTruta = 'cultivo'
 	ORDER BY empresa;
+    
+    -- selects VICTOR G
+    
+    
+show 	tables;
+desc cliente;
+
+select * from cliente;
+
+alter table cliente rename column telefone to telefone;
+
+update cliente set email = 'emailnovoteste@email.com'
+	where idCliente = 1;
+    
+SELECT empresa AS 'Empresa parceira',
+	email AS 'Email para contato',
+    cnpj AS 'CNPJ da empresa'
+    FROM cliente;  
+    
+select concat(empresa,' ',email)  from cliente;
+
+select concat(empresa, '  -  ', email) as 'Empresa - Contato' from cliente;
+
+SELECT empresa as 'Empresa parceira',
+	case 
+	when dtCadastro > '2000-04-12'	then 'Parceira de longa data'
+    end as 'Pode contar com eles mesmo?'
+    from cliente;
+    
+alter table cliente add column teste varchar(1);
+
+alter table cliente drop column teste;
+    
+
+
+
+
+
