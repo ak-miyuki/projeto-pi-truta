@@ -219,10 +219,7 @@ SELECT empresa AS 'Nome da empresa',
 SELECT empresa AS 'Nome da empresa', faseTruta as 'fase de crescimento' FROM tanque
 	WHERE periodoFertil = false
 	AND faseTruta = 'cultivo'
-	ORDER BY empresa;
-    
-    -- selects VICTOR G
-    
+	ORDER BY empresa;   
     
 show 	tables;
 desc cliente;
