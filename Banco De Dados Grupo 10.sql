@@ -1,6 +1,8 @@
 /*
+---------- GRUPO 10 ----------
+
 Andrei Sato	04252015
-Andreia Miyuki Kubota 04252015
+Andreia Miyuki Kubota 04252014
 Deivid Duarte Oliveira 04252007
 João  Ricardo Jortieke Junior 04252002
 Maria Maia 04252011
@@ -20,7 +22,7 @@ CREATE TABLE cliente (
     telefone VARCHAR(13) NOT NULL UNIQUE,
     senha VARCHAR(20) NOT NULL,
         CONSTRAINT chkSeguranca
-            CHECK (senha NOT LIKE '%123%'),   -- Idéia de preocupação com segurança
+            CHECK (senha NOT LIKE '%123%'),   -- Príncipio de representação de conceitos de segurança relacionado à senha. 
     cnpj CHAR(18)NOT NULL UNIQUE,
     dtCadastro DATE NOT NULL,
     email VARCHAR(50) NOT NULL UNIQUE
@@ -34,7 +36,6 @@ INSERT INTO cliente VALUES
 	(default,'Filhos da Truta','551892761100','vb3894','66.800.473/0001-81','2021-05-27','filhosdatruta@gmail.com'),
 	(default,'Kamehame Peixes','5511922224000','n4op8912','46.668.258/0001-61','2023-12-30','kamehamepeixes@gmail.com'),
 	(default,'Truta Olimpica','5511956619000','fbiup238','70.035.407/0001-30','2024-01-01','trutaolimpica@gmail.com'),
-	
 	(default,'Como pode um peixe','98572-7465','kdmjs874','86.852.658/0001-80','2025-08-03','peixevivo@outlook.com'),
     (default,'Shark Powder','99325-7863','kfoei987c','52.687.852/0001-95','2025-06-19','sharkpowder@outlook.com')
 ;
@@ -54,6 +55,30 @@ SELECT empresa AS 'Nome da empresa',
     AS 'Tanques localizados em:'
     FROM cliente;
 
+INSERT INTO cliente VALUES
+	(default,'Peixes','5511987614324','senha123','10.245.633/1000-12','2025-11-16','empresadopeixe@gmail.com'); -- Exemplo de violação da regra de segurança aplicada. 
+
+SELECT empresa AS 'Nome da empresa',
+	CASE
+		WHEN dtCadastro <> '2024-01-01' THEN CONCAT(empresa, ' Login: ', cnpj)
+		ELSE CONCAT(empresa, ' Contato: ', email)
+    END AS InformacaoCliente
+FROM cliente ORDER BY dtCadastro DESC;
+
+SELECT empresa AS 'Nome da empresa',
+ date_format(dtCadastro, '%d/%m/%Y %h:%m:%s') AS DataCadastro FROM cliente;
+
+SELECT empresa AS 'Nome da Empresa',
+	CASE
+		WHEN dtCadastro >= '2025-01-01' THEN 'Cliente Novo'
+        WHEN dtCadastro BETWEEN '2023-01-01' AND '2024-12-31' THEN 'Cliente Recente'
+        WHEN dtCadastro < '2023-01-01' THEN 'Cliente Antigo'
+        ELSE 'Cadastro não identificado'
+    END AS ClassificacaoCadastro
+FROM cliente;
+
+
+
 -- AS TABELAS Login E Cliente são relacionais, e a tabela Login só recebe os dados para validar o login e senha. (Chave estrangeira)
 CREATE TABLE login (
     idCliente INT PRIMARY KEY AUTO_INCREMENT,
@@ -71,7 +96,6 @@ insert into login values
 	(default,'Filhos da Truta' ,'97659-7323' ,'vb3894' ,'66.800.473/0001-81' ,'filhosdatruta@gmail.com'),
 	(default,'Kamehame Peixes' ,'99256-1461' ,'n4op8912' ,'46.668.258/0001-61' ,'kamehamepeixes@gmail.com'),
 	(default,'Truta Olimpica' ,'99287-6462' ,'fbiup238' ,'70.035.407/0001-30', 'trutaolimpica@gmail.com'),
-    
     (default,'Como pode um peixe','98572-7465','kdmjs874','86.852.658/0001-80','peixevivo@outlook.com'),
     (default,'Shark Powder','99325-7863','kfoei987c','52.687.852/0001-95','sharkpowder@outlook.com')
 ;
@@ -79,11 +103,24 @@ insert into login values
 
 SELECT concat(senha ,' ', email) AS login FROM cliente
 	WHERE dtCadastro > '2023-05-27' ORDER BY empresa DESC;
-    
 
 
 SELECT email FROM login 
 	WHERE email ='gmail';
+    
+SELECT empresa AS 'Nome da empresa',
+ date_format(dtCadastro, '%d/%m/%Y %h:%m:%s') AS DataCadastro FROM cliente;
+
+SELECT empresa AS 'Nome da Empresa',
+	CASE
+		WHEN dtCadastro >= '2025-01-01' THEN 'Cliente Novo'
+        WHEN dtCadastro BETWEEN '2023-01-01' AND '2024-12-31' THEN 'Cliente Recente'
+        WHEN dtCadastro < '2023-01-01' THEN 'Cliente Antigo'
+        ELSE 'Cadastro não identificado'
+    END AS ClassificacaoCadastro
+FROM cliente;
+
+
 
 CREATE TABLE coletaArduino (
     idSensor INT PRIMARY KEY AUTO_INCREMENT,
@@ -115,6 +152,7 @@ SELECT empresa AS 'Nome da empresa',
         FROM coletaArduino
         WHERE temperatura > 20;
         -- empresa: tanque X precisa de atenção. temperatura em x graus
+        
 SELECT tanque AS 'Número do tanque',
 	CONCAT(empresa,': O tanque ',tanque,' precisa de atenção. Temperatura em ',temperatura,' graus.') AS aviso
     FROM coletaArduino
@@ -129,7 +167,7 @@ CREATE TABLE tanque (
 	temperaturaMedia DECIMAL(3,1) NOT NULL,
 	temperaturaIdealMaxima DECIMAL(3,1) NOT NULL,
 	qtdTruta INT NOT NULL, 
-	faseTruta VARCHAR(30)
+	faseTruta VARCHAR(30),
 			CONSTRAINT chkFase
 				CHECK(faseTruta IN('crescimento','cultivo')),
 	periodoFertil BOOLEAN
@@ -160,10 +198,58 @@ INSERT INTO tanque VALUES
             FROM tanque
             WHERE periodoFertil = true
             ORDER BY empresa;
-            
+
+
 SELECT empresa, tanque, faseTruta as 'Fase',
  CASE
  WHEN periodoFertil = 'true' THEN 'Seus peixes estão em período fértil'
  ELSE 'Seus peixes não estão em período fértil'
  END AS 'Período fértil'
  FROM tanque ORDER BY periodoFertil ASC;
+ 
+ SELECT * FROM tanque
+	WHERE faseTruta = "cultivo";
+
+SELECT empresa AS 'Nome da empresa',
+	CONCAT('As trutas do tanque número ', tanque, ' não estão no período fértil. Não precisa alterar a temperatura da água') AS Aviso
+	FROM tanque
+	WHERE periodoFertil = false
+	ORDER BY empresa;
+
+SELECT empresa AS 'Nome da empresa', faseTruta as 'fase de crescimento' FROM tanque
+	WHERE periodoFertil = false
+	AND faseTruta = 'cultivo'
+	ORDER BY empresa;   
+    
+show 	tables;
+desc cliente;
+
+select * from cliente;
+
+update cliente set email = 'emailnovoteste@email.com'
+	where idCliente = 1;
+    
+SELECT empresa AS 'Empresa parceira',
+	email AS 'Email para contato',
+    cnpj AS 'CNPJ da empresa'
+    FROM cliente;  
+    
+select concat(empresa,' ',email)  from cliente;
+
+select concat(empresa, '  -  ', email) as 'Empresa - Contato' from cliente;
+
+SELECT empresa as 'Empresa parceira',
+	case 
+	when dtCadastro > '2000-04-12'	then 'Parceira de longa data'
+    end as 'Pode contar com eles mesmo?'
+    from cliente;
+    
+alter table cliente add column teste varchar(1);
+
+alter table cliente drop column teste;
+    
+
+
+
+
+
