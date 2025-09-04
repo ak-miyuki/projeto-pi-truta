@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truta Arco Iris</title>
+</head>
+<body>
+     <H2>Calculadora Financeira Truta Arco Iris</H2><br><br>
+     Quantidade de Truta
+     <input id="input_quantidadetruta" type="text"><br><br><br>
+     <button onclick="truta()">Calcular Truta</button><br><br><br>
+     Quantidade de Alevinos
+     <input id="input_quantidadealevino" type="text"><br><br><br>
+     <button onclick="alevino()">Calcular Alevino</button><br><br><br>
+     <button onclick="limpar()">Clear</button><br><br>
+     <div id="div_quantidade"></div>
+
+</body>
+</html>
+
+<script>
+    var ganhoacum= 0;
+    function truta(){
+        var truta= Number(input_quantidadetruta.value);
+        var trutasem= truta * 0.3;
+        var trutacom= truta * 0.83;
+        var vendasem= trutasem * 30;
+        var vendacom= trutacom * 30;
+        var ganho= vendacom - vendasem;
+        ganhoacum+= ganho; 
+        var ganhoporcent= ((ganho / vendasem) * 100);
+        div_quantidade.innerHTML+= `Quantidade de truta para venda sem o medidor de temperatura é <b>${trutasem}</b>.<br><br>
+        Quantidade de truta para venda com o medidor de temperatura é <b>${trutacom}</b>.<br><br>
+        Valor da venda sem o medidor de temperatura é de <b>R$${vendasem.toFixed(2)}</b>.<br><br>
+        Valor da venda com o medidor de temperatura é de <b>R$${vendacom.toFixed(2)}</b>.<br><br>
+        Ganho em relação a venda sem o controle de temperatura é de <b>R$${ganho.toFixed(2)}</b> ou <b>${ganhoporcent.toFixed(2)}%</b>.<br><br>
+        Total acumulado é de <b>R$${ganhoacum.toFixed(2)}</b>.<br><br>`
+    }
+    function alevino(){
+        var alevino= Number(input_quantidadealevino.value);
+        var alevinosem= alevino * 0.1;
+        var alevinocom= alevino * 0.93;
+        var vendasem= alevinosem * 0.16;
+        var vendacom= alevinocom *0.16;
+        var ganho= vendacom - vendasem;
+        ganhoacum+= ganho;
+        var ganhoporcent= ((ganho / vendasem) * 100);
+        div_quantidade.innerHTML+= `Quantidade de alevinos que conseguem sobreviver até a fase adulta sem o medidor de temperatura é <b>${alevinosem}</b>.<br><br>
+        Quantidade de alevinos que conseguem sobreviver até a fase adulta com o medidor de temperatura é <b>${alevinocom}</b>.<br><br>
+        Valor da venda sem o medidor de temperatura é de <b>R$${vendasem.toFixed(2)}</b>.<br><br>
+        Valor da venda com o medidor de temperatura é de <b>R$${vendacom.toFixed(2)}</b>.<br><br>
+        Ganho em relação a venda sem o controle de temperatura é de <b>R$${ganho.toFixed(2)}</b> ou <b>${ganhoporcent.toFixed(2)}%</b>.<br><br>
+        Total acumulado é de <b>R$${ganhoacum.toFixed(2)}</b>.<br><br>`
+    }
+    function limpar(){
+        div_quantidade.innerHTML= `Total acumulado anteriormente foi de <b>R$${ganhoacum.toFixed(2)}</b>, agora é R$0`
+        ganhoacum= 0; 
+    }
+</script>
+
