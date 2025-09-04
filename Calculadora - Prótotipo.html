@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troust Calculator</title>
+    <link rel="stylesheet" href="Estilização.css">
+
+</head>
+<body>
+
+<h1> Troust Solution </h1>
+
+<div style="text-align: justify;">
+
+Quantidade de alevinos: <input type="number" id="input_qtdalevinos">
+Valor: <input type="number" id="input_valorkg"> (por kg)
+Massa média: <input type="number" id="input_massamedia">
+
+</div>
+
+<br> 
+
+
+<button onclick="" id="com_solucao"> Com sensor </button>
+
+<button onclick="" id="sem_solucao"> Sem sensor </button>
+
+<button onclick="" id="diferenca"> Diferença </button>
+
+<button onclick="reset()" id="reset"> Reset </button>
+
+
+<div id="semsolucao"></div>
+
+<div id="solucao"></div>
+
+<div id="diferenca"></div>
+
+</body>
+
+</html>
+
+<script>
+
+var semSn = 0.05
+var comSn = 1.25
+
+function calcPeixes() {
+
+var qtdAlevinos = Number(input_qtdalevinos.values)
+var valor = Number(input_valorkg.value)
+var mMassa = Number(input_massamedia.value)
+
+var CalcBio = mMassa / 1000  // Cálculo de massa sem ganhos.
+
+var calcPerda = qtdAlevinos * semSn // Cálculo de perda. 
+
+
+
+}
+
+function calcSensor() {
+
+var qtdAlevinos = Number(input_qtdalevinos.values)
+var valor = Number(input_valorkg.value)
+var mMassa = Number(input_massamedia.value)
+
+var CalcBio = (mMassa / 1000) * comSn // Cálculo de massa + variável global "ComSn"  
+
+var calcGanho = qtdAlevinos * comSn
+
+
+}
+
+
+
+function reset(){
+
+
+
+}
+
+</script>
