@@ -1,0 +1,137 @@
+<!-- Quatro botões: 
+Sem a solução 
+Com a solução 
+Diferença (headshot) 
+Reset 
+Inputs: qtde alevinos, valor kg, massa média 
+Outputs: mortalidade (%), prejuizo , massa média, preço/kg com aumento de qualidade 
+Mortalidade: 95% sem sensor 
+30% com sensor 
+Massa média: acréscimo de 25% com sensor 
+Preço por kg: 20   
+Boas ideias 
+Botão que aparece após processar os dados 
+Alert para mudança de página ao clicar no botão  
+Valor acumulado com botão reset  -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+    
+    <style>
+
+    .red{
+        color: rgb(228, 37, 97);
+    }
+
+    .green{
+        color: rgb(19, 182, 103);
+    }
+
+    .blue{
+        color: rgb(77, 51, 244);
+    }
+
+    </style>
+
+</head>
+<body>
+    <h1>Simulador Financeiro - Troust Solutions</h1>
+
+    Quantidade de alevinos (filhotes de peixe) que possui:
+    <input id="input_quantidade" type="text" placeholder="e.g. 10000"><br><br>
+    Valor do Kg da truta em R$:
+    <input id="input_valorKg" type="text" placeholder="e.g. 20.50"><br><br>
+    Massa (peso) média da truta para venda em gramas:
+    <input id="input_peso" type="text" placeholder="e.g. 300"><br><br>
+    
+    <select id="select_calculo">
+        <option value="#" selected disabled>Selecione uma opção</option>
+        <option value="2">Diferença Acumulada</option>
+        <option value="1">Sem Sensor</option>
+        <option value="3">Com Sensor</option>
+    </select>
+
+    <button onclick="calcular()">Calcular</button>
+    <button onclick="limpar()">Clear</button> <br><br>
+
+<div id="div_mensagem"></div>
+
+</body>
+</html>
+
+<script>
+    var percentViveSem = 0.05;
+    var percentViveCom = 0.7;
+    var aumentoMassa = (1 + 0.25);
+    var receitaCom = 0;
+    var receitaSem = 0;    
+    var lote = 0;
+    var diferencaAcumulada = 0;
+
+       
+    function calcular(){
+        var selecao = Number(select_calculo.value);
+        
+        if (selecao <= 2) {
+            var quantidade = Number(input_quantidade.value);
+            var valorGrama = (Number(input_valorKg.value) / 1000);
+            var peso = Number(input_peso.value);
+            var viveSem = (quantidade * percentViveSem);
+            receitaSem = (viveSem * peso * valorGrama);
+            var prejuizo = ((quantidade - viveSem) * peso * valorGrama);
+
+            div_mensagem.innerHTML += `<span class="red">
+            ------------------------------------------------------------------------------------------<br>
+            Das <b>${quantidade}</b> trutas que você tem,<br><br>
+            Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o nosso sensor de temperatura!<br><br>
+            Sua receita será de <b>R$ ${receitaSem.toFixed(2)}</b>. <i><b>Você deixará de ganhar R$${prejuizo.toFixed(2)}!!!</b></i><br><br>
+            A massa (peso) média da sua truta para venda continuará igual, <b>${peso}g</b>.<br>
+            ------------------------------------------------------------------------------------------<br></span>`
+        }
+        
+        if (selecao >= 2) {
+            var quantidade = Number(input_quantidade.value);
+            var valorGrama = (Number(input_valorKg.value) / 1000);
+            var peso = Number(input_peso.value);
+            var viveCom = (quantidade * percentViveCom);
+            peso *= aumentoMassa;
+            receitaCom = (viveCom * peso * valorGrama);
+
+            div_mensagem.innerHTML += `<span class="green">
+            ------------------------------------------------------------------------------------------<br>
+            Das <b>${quantidade}</b> trutas que você tem,<br><br>
+            <b>${viveCom.toFixed(0)}</b> sobreviverão com o nosso sensor de temperatura!<br><br>
+            <b>Você terá de receita R$${receitaCom.toFixed(2)}!!!</b><br><br>
+            A massa (peso) média da sua truta para venda aumentará para <b>${peso}g</b>.<br>
+            ------------------------------------------------------------------------------------------<br></span>`
+
+        }
+        
+        if (selecao == 2) {
+            lote ++;
+            var porcentagem = (((viveCom - viveSem) / quantidade) * 100);
+            diferencaAcumulada += receitaCom - receitaSem;
+
+            div_mensagem.innerHTML = `<span class="blue">Utilizando nosso sensor, o número de trutas que sobreviverão a mais em relação a não usar o sensor é de <b>${(viveCom - viveSem).toFixed(0)}</b>,<br><br>
+             o que equivale a <b>${porcentagem.toFixed(2)}%</b>.<br><br>
+            O ganho acumulado usando o sensor em relação a não usar o sensor com <b>${lote} lote(s)</b>,<br><br>
+            é de <b>R$ ${diferencaAcumulada.toFixed(2)}</b>.<br><br></span>`
+        }
+        
+        
+    }
+
+    function limpar(){
+        div_mensagem.innerHTML = `Você tinha um total acumulado de <b>R$ ${diferencaAcumulada.toFixed(2)}</b>,<br><br>
+            agora você tem <b>R$0</b> acumulado.`
+
+            diferencaAcumulada = 0;
+    }
+
+
+</script>
+
