@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora financeira</title>
+    <link rel="stylesheet" href="calculadora financeira.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=TASA+Orbiter:wght@400..800&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="card_calculadora">
+        <div class="titulo">
+            <p>
+                Calcule seus lucros
+            </p>
+        </div>
+
+        <p>Quantidade de trutas criadas:</p>
+        <input type="text" id="input_qnttrutas" placeholder="ex: 5.000 peixes">
+
+        <p>Preço de venda por truta:</p>
+        <input type="text" id="input_precovenda" placeholder="ex: R$ 20 cada">
+
+        <p>Taxa média de mortalidade atual:</p>
+        <input type="text" id="input_taxaatual" placeholder="ex: 15%">
+
+        <p>Taxa média de mortalidade com o sistema IoT:</p>
+        <p id="taxaAplicacao">5%</p>
+
+        <p>Custo de implantação do sistema IoT:</p>
+        <p id="taxaImplantacao">R$ 10000</p>
+
+        <button onclick="calculoFinanceiro()">Calcule seus ganhos</button>
+
+        <div id="div_msg"></div>
+
+    </div>
+
+
+
+
+
+    <script src="calculadorafinanceira.js"></script>
+</body>
+
+</html>
