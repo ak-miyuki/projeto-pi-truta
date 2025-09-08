@@ -42,11 +42,11 @@ Valor acumulado com botão reset  -->
     <h1>Simulador Financeiro - Troust Solutions</h1>
 
     Quantidade de alevinos (filhotes de peixe) que possui:
-    <input id="input_quantidade" type="text" placeholder="e.g. 10000"><br><br>
+    <input id="input_quantidade" type="number" placeholder="e.g. 10000"><br><br>
     Valor do Kg da truta em R$:
-    <input id="input_valorKg" type="text" placeholder="e.g. 20.50"><br><br>
+    <input id="input_valorKg" type="number" placeholder="e.g. 20.50"><br><br>
     Massa (peso) média da truta para venda em gramas:
-    <input id="input_peso" type="text" placeholder="e.g. 300"><br><br>
+    <input id="input_peso" type="number" placeholder="e.g. 300"><br><br>
     
     <select id="select_calculo">
         <option value="#" selected disabled>Selecione uma opção</option>
@@ -58,6 +58,7 @@ Valor acumulado com botão reset  -->
     <button onclick="calcular()">Calcular</button>
     <button onclick="limpar()">Clear</button> <br><br>
 
+ 
 <div id="div_mensagem"></div>
 
 </body>
@@ -119,7 +120,8 @@ Valor acumulado com botão reset  -->
             div_mensagem.innerHTML = `<span class="blue">Utilizando nosso sensor, o número de trutas que sobreviverão a mais em relação a não usar o sensor é de <b>${(viveCom - viveSem).toFixed(0)}</b>,<br><br>
              o que equivale a <b>${porcentagem.toFixed(2)}%</b>.<br><br>
             O ganho acumulado usando o sensor em relação a não usar o sensor com <b>${lote} lote(s)</b>,<br><br>
-            é de <b>R$ ${diferencaAcumulada.toFixed(2)}</b>.<br><br></span>`
+            é de <b>R$ ${diferencaAcumulada.toFixed(2)}</b>.<br><br></span>
+               <a href="https://www.figma.com/design/B9UJ5vjbpqp2RiNlBbmxdv/Untitled?node-id=0-1&m=dev&t=QjL0ghhZ2ZPfk6LW-1"><button> Compre agora.</button></a>`
         }
         
         
