@@ -59,7 +59,8 @@ Valor acumulado com botão reset  -->
     <button onclick="limpar()">Clear</button> <br><br>
 
  
-<div id="div_mensagem"></div>
+<div id="div_mensagem"></div><br><br>
+<div id="div_imagem"></div><br><br>
 
 </body>
 </html>
@@ -89,10 +90,11 @@ Valor acumulado com botão reset  -->
             ------------------------------------------------------------------------------------------<br>
             Das <b>${quantidade}</b> trutas que você tem,<br><br>
             Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o nosso sensor de temperatura!<br><br>
-            Sua receita será de <b>R$ ${receitaSem.toFixed(2)}</b>. <i><b>Você deixará de ganhar R$${prejuizo.toFixed(2)}!!!</b></i><br><br>
+            Sua receita será de <b>R$ ${receitaSem.toFixed(2)}</b>.<br><br>
             A massa (peso) média da sua truta para venda continuará igual, <b>${peso}g</b>.<br>
-            ------------------------------------------------------------------------------------------<br></span><br><br>
-            <img style='width:300px' src = 'Gemini_Generated_Image_6uk1an6uk1an6uk1.png'>`
+            ------------------------------------------------------------------------------------------<br></span><br><br>`
+
+            div_imagem.innerHTML = `<img style='width:300px' src = 'Tanque com poucas trutas.png'><br><br>`
         }
         
         if (selecao >= 2) {
@@ -109,8 +111,9 @@ Valor acumulado com botão reset  -->
             <b>${viveCom.toFixed(0)}</b> sobreviverão com o nosso sensor de temperatura!<br><br>
             <b>Você terá de receita R$${receitaCom.toFixed(2)}!!!</b><br><br>
             A massa (peso) média da sua truta para venda aumentará para <b>${peso}g</b>.<br>
-            ------------------------------------------------------------------------------------------<br></span><br><br>
-            <img style='width:300px' src = 'Gemini_Generated_Image_gvyiy9gvyiy9gvyi.png'>`
+            ------------------------------------------------------------------------------------------<br></span><br><br>`   
+            
+            div_imagem.innerHTML = `<img style='width:300px' src = 'Tanque com resfriamento.png'><br><br>`
 
         }
         
@@ -119,11 +122,11 @@ Valor acumulado com botão reset  -->
             var porcentagem = (((viveCom - viveSem) / quantidade) * 100);
             diferencaAcumulada += receitaCom - receitaSem;
 
-            div_mensagem.innerHTML = `<span class="blue">Utilizando nosso sensor, o número de trutas que sobreviverão a mais em relação a não usar o sensor é de <b>${(viveCom - viveSem).toFixed(0)}</b>,<br><br>
+            div_mensagem.innerHTML += `<span class="blue">Utilizando nosso sensor, o número de trutas que sobreviverão a mais em relação a não usar o sensor é de <b>${(viveCom - viveSem).toFixed(0)}</b>,<br><br>
              o que equivale a <b>${porcentagem.toFixed(2)}%</b>.<br><br>
             O ganho acumulado usando o sensor em relação a não usar o sensor com <b>${lote} lote(s)</b>,<br><br>
             é de <b>R$ ${diferencaAcumulada.toFixed(2)}</b>.<br><br></span>
-               <a href="https://www.figma.com/design/B9UJ5vjbpqp2RiNlBbmxdv/Untitled?node-id=0-1&m=dev&t=QjL0ghhZ2ZPfk6LW-1"><button> Compre agora.</button></a>`
+               <a href="https://www.figma.com/design/B9UJ5vjbpqp2RiNlBbmxdv/Untitled?node-id=0-1&m=dev&t=QjL0ghhZ2ZPfk6LW-1"><button> Compre agora.</button></a><br><br>`
         }
         
         
