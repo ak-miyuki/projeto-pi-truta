@@ -60,7 +60,6 @@ Valor acumulado com botão reset  -->
 
  
 <div id="div_mensagem"></div><br><br>
-<div id="div_imagem"></div><br><br>
 
 </body>
 </html>
@@ -92,9 +91,10 @@ Valor acumulado com botão reset  -->
             Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o nosso sensor de temperatura!<br><br>
             Sua receita será de <b>R$ ${receitaSem.toFixed(2)}</b>.<br><br>
             A massa (peso) média da sua truta para venda continuará igual, <b>${peso}g</b>.<br>
-            ------------------------------------------------------------------------------------------<br></span><br><br>`
+            ------------------------------------------------------------------------------------------<br></span><br>
+            <img style='width:300px' src = 'Tanque com poucas trutas.png'><br><br>`
 
-            div_imagem.innerHTML = `<img style='width:300px' src = 'Tanque com poucas trutas.png'><br><br>`
+            
         }
         
         if (selecao >= 2) {
@@ -111,9 +111,10 @@ Valor acumulado com botão reset  -->
             <b>${viveCom.toFixed(0)}</b> sobreviverão com o nosso sensor de temperatura!<br><br>
             <b>Você terá de receita R$${receitaCom.toFixed(2)}!!!</b><br><br>
             A massa (peso) média da sua truta para venda aumentará para <b>${peso}g</b>.<br>
-            ------------------------------------------------------------------------------------------<br></span><br><br>`   
+            ------------------------------------------------------------------------------------------<br></span><br>
+            <img style='width:300px' src = 'Tanque com resfriamento.png'><br><br>`   
             
-            div_imagem.innerHTML = `<img style='width:300px' src = 'Tanque com resfriamento.png'><br><br>`
+            
 
         }
         
