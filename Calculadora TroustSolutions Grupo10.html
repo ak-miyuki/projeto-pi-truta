@@ -72,6 +72,9 @@ Valor acumulado com botão reset  -->
     var receitaSem = 0;    
     var lote = 0;
     var diferencaAcumulada = 0;
+    var viveComAcumulado = 0;
+    var viveSemAcumulado = 0;
+    var qtAcumulada =0;
 
        
     function calcular(){
@@ -88,7 +91,7 @@ Valor acumulado com botão reset  -->
             div_mensagem.innerHTML += `<span class="red">
             ------------------------------------------------------------------------------------------<br>
             Das <b>${quantidade}</b> trutas que você tem,<br><br>
-            Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o nosso sensor de temperatura!<br><br>
+            Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o monitoramento de temperatura! (taxa de sobrevivência = 5%)<br><br>
             Sua receita será de <b>R$ ${receitaSem.toFixed(2)}</b>.<br><br>
             A massa (peso) média da sua truta para venda continuará igual, <b>${peso}g</b>.<br>
             ------------------------------------------------------------------------------------------<br></span><br>
@@ -108,7 +111,7 @@ Valor acumulado com botão reset  -->
             div_mensagem.innerHTML += `<span class="green">
             ------------------------------------------------------------------------------------------<br>
             Das <b>${quantidade}</b> trutas que você tem,<br><br>
-            <b>${viveCom.toFixed(0)}</b> sobreviverão com o nosso sensor de temperatura!<br><br>
+            <b>${viveCom.toFixed(0)}</b> sobreviverão com o monitoramento de temperatura! (taxa de sobrevivência = 70%)<br><br>
             <b>Você terá de receita R$${receitaCom.toFixed(2)}!!!</b><br><br>
             A massa (peso) média da sua truta para venda aumentará para <b>${peso}g</b>.<br>
             ------------------------------------------------------------------------------------------<br></span><br>
@@ -120,12 +123,17 @@ Valor acumulado com botão reset  -->
         
         if (selecao == 2) {
             lote ++;
-            var porcentagem = (((viveCom - viveSem) / quantidade) * 100);
             diferencaAcumulada += receitaCom - receitaSem;
+            viveComAcumulado += viveCom;
+            viveSemAcumulado += viveSem;
+            qtAcumulada += quantidade;
+            var porcentagem = (((viveComAcumulado - viveSemAcumulado) / qtAcumulada) * 100);
 
-            div_mensagem.innerHTML += `<span class="blue">Utilizando nosso sensor, o número de trutas que sobreviverão a mais em relação a não usar o sensor é de <b>${(viveCom - viveSem).toFixed(0)}</b>,<br><br>
+
+            div_mensagem.innerHTML = `<span class="blue"> Dos <b>${qtAcumulada}</b> alevinos, <b>${viveComAcumulado}</b> sobreviverão caso a temperatura seja monitorada.<br><br>
+            O número de trutas que sobreviverão a mais em relação ao resultado sem o monitoramento da temperatura é de <b>${(viveComAcumulado - viveSemAcumulado).toFixed(0)}</b>,<br><br>
              o que equivale a <b>${porcentagem.toFixed(2)}%</b>.<br><br>
-            O ganho acumulado usando o sensor em relação a não usar o sensor com <b>${lote} lote(s)</b>,<br><br>
+            A diferença acumulada entre os ganhos de ter monitoramento de temperatura em relação a não ter monitoramento com <b>${lote} lote(s)</b>,<br><br>
             é de <b>R$ ${diferencaAcumulada.toFixed(2)}</b>.<br><br></span>
                <a href="https://www.figma.com/design/B9UJ5vjbpqp2RiNlBbmxdv/Untitled?node-id=0-1&m=dev&t=QjL0ghhZ2ZPfk6LW-1"><button> Compre agora.</button></a><br><br>`
         }
@@ -138,6 +146,10 @@ Valor acumulado com botão reset  -->
             agora você tem <b>R$0</b> acumulado.`
 
             diferencaAcumulada = 0;
+            viveComAcumulado = 0;
+            viveSemAcumulado = 0;
+            qtAcumulada =0;
+
     }
 
 
