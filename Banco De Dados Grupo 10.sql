@@ -182,8 +182,7 @@ INSERT INTO tanque VALUES
 	(default, 'Kamehame Peixes', 1, 18.9, 15, 16, 17, 300, 'crescimento', false),
 	(default, 'Truta Olimpica', 1, 16, 15, 16, 17, 400, 'crescimento', false),
 	(default, 'Como pode um peixe', 1, 18.3, 10, 15, 20, 750, 'cultivo', true),
-	(default, 'Shark Powder', 1, 17.6, 15, 16, 17, 83, 'crescimento', false)
-    ;
+	(default, 'Shark Powder', 1, 17.6, 15, 16, 17, 83, 'crescimento', false);
     
     SELECT * FROM tanque;
     
