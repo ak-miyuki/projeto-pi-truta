@@ -16,7 +16,7 @@ void loop() {
   temperaturaIdeal = temperaturaCelsius; 
 
   //Serial.print("Temperatura: "); // Print: 'Temperatura: dado C'
-  Serial.print("Temperatura Ideal:"); 
+  Serial.print("Temperatura Ideal:");           
   Serial.print(temperaturaIdeal);
   Serial.print(" ");
   Serial.print("Temperatura Minima:");

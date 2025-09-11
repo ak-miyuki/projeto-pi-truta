@@ -86,9 +86,9 @@ Valor acumulado com botão reset  -->
             var peso = Number(input_peso.value);
             var viveSem = (quantidade * percentViveSem);
             receitaSem = (viveSem * peso * valorGrama);
-            var prejuizo = ((quantidade - viveSem) * peso * valorGrama);
 
-            div_mensagem.innerHTML += `<span class="red">
+
+            div_mensagem.innerHTML = `<span class="red">
             ------------------------------------------------------------------------------------------<br>
             Das <b>${quantidade}</b> trutas que você tem,<br><br>
             Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o monitoramento de temperatura! (taxa de sobrevivência = 5%)<br><br>
@@ -108,7 +108,7 @@ Valor acumulado com botão reset  -->
             peso *= aumentoMassa;
             receitaCom = (viveCom * peso * valorGrama);
 
-            div_mensagem.innerHTML += `<span class="green">
+            div_mensagem.innerHTML = `<span class="green">
             ------------------------------------------------------------------------------------------<br>
             Das <b>${quantidade}</b> trutas que você tem,<br><br>
             <b>${viveCom.toFixed(0)}</b> sobreviverão com o monitoramento de temperatura! (taxa de sobrevivência = 70%)<br><br>

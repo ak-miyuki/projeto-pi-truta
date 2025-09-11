@@ -129,6 +129,22 @@ CREATE TABLE coletaArduino (
     dtColeta datetime,
     temperatura DECIMAL(4,1)
     );
+    
+insert into coletaArduino values
+(default, 'Filhos da truta', 2, '2025-05-04', 23.7);
+
+select * from coletaArduino;
+
+select concat(empresa, '      ', dtColeta) as 'Data de coleta da empresa'
+    from coletaArduino
+    WHERE empresa LIKE 'F%';
+    
+select concat(empresa '    ', dtColeta),
+	case
+		when empresa like 'F%'
+        then 'começa com F'
+        end		
+as 'Data de coleta da empresa' from coletaArduino;
 
 DESC coletaArduino;
 
