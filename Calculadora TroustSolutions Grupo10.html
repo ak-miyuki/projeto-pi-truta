@@ -65,7 +65,7 @@ Valor acumulado com botão reset  -->
 </html>
 
 <script>
-    var percentViveSem = 0.05;
+    var percentViveSem = 0.05; 
     var percentViveCom = 0.7;
     var aumentoMassa = (1 + 0.25);
     var receitaCom = 0;
@@ -91,7 +91,7 @@ Valor acumulado com botão reset  -->
             div_mensagem.innerHTML = `<span class="red">
             ------------------------------------------------------------------------------------------<br>
             Das <b>${quantidade}</b> trutas que você tem,<br><br>
-            Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o monitoramento de temperatura! (taxa de sobrevivência = 5%)<br><br>
+            Apenas <b>${viveSem.toFixed(0)}</b> sobreviverão sem o monitoramento de temperatura! (taxa de sobrevivência = 5%, segundo EMBRAPA)<br><br>
             Sua receita será de <b>${receitaSem.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}</b>.<br><br>
             A massa (peso) média da sua truta para venda continuará igual, <b>${peso}g</b>.<br>
             ------------------------------------------------------------------------------------------<br></span><br>
@@ -111,9 +111,9 @@ Valor acumulado com botão reset  -->
             div_mensagem.innerHTML = `<span class="green">
             ------------------------------------------------------------------------------------------<br>
             Das <b>${quantidade}</b> trutas que você tem,<br><br>
-            <b>${viveCom.toFixed(0)}</b> sobreviverão com o monitoramento de temperatura! (taxa de sobrevivência = 70%)<br><br>
+            <b>${viveCom.toFixed(0)}</b> sobreviverão com o monitoramento de temperatura! (taxa de sobrevivência = 70%, segundo EMBRAPA)<br><br>
             <b>Você terá de receita ${receitaCom.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}!!!</b><br><br>
-            A massa (peso) média da sua truta para venda aumentará para <b>${peso}g</b>.<br>
+            A massa (peso) média da sua truta para venda aumentará em 25% (segundo EMBRAPA) para <b>${peso}g</b>.<br>
             ------------------------------------------------------------------------------------------<br></span><br>
             <img style='width:300px' src = 'Tanque com resfriamento.png'><br><br>`   
             
