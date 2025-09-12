@@ -16,6 +16,8 @@ CREATE DATABASE SPRINT1;
 
 USE SPRINT1; 
 
+show tables;
+-- -----------------------------------------------------------------------------------------------------------------------
 CREATE TABLE cliente (
     idCliente INT PRIMARY KEY AUTO_INCREMENT,
     empresa VARCHAR(50) NOT NULL UNIQUE,
@@ -120,43 +122,43 @@ SELECT empresa AS 'Nome da Empresa',
     END AS ClassificacaoCadastro
 FROM cliente;
 
-
+-- ----------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE coletaArduino (
-    idSensor INT PRIMARY KEY AUTO_INCREMENT,
+    idColeta INT PRIMARY KEY AUTO_INCREMENT,
+    sensor INT NOT NULL,
     empresa VARCHAR(50) NOT NULL,
     tanque INT NOT NULL,
     dtColeta datetime,
     temperatura DECIMAL(4,1)
     );
-    
-insert into coletaArduino values
-(default, 'Filhos da truta', 2, '2025-05-04', 23.7);
 
-select * from coletaArduino;
+SELECT * FROM coletaArduino;
+
+DESC coletaArduino;
+
+INSERT INTO coletaArduino VALUES
+	(default,1,'Fish Company', 1,'2025-08-10 11:30:40', 29),
+	(default,2,',Peixes Co', 1,'2025-07-10 13:40:59', 19.5),
+	(default,3,'Filhos da Truta', 1,'2024-08-10 17:50:33', 15.3),
+	(default,4,'Kamehame Peixes', 1,'2023-01-15 22:22:16', 18.9),
+	(default,5,'Truta Olimpica', 1,'2021-08-30 23:10:31', 16),
+    (default,6,'Como pode um peixe', 1,'2025-08-03 15:10:12', 8),
+	(default,7,'Shark Powder', 1,'2025-06-19 15:10:12', 6.3);
+    
+select concat ( empresa, ' esta é empresa é legal')
+as EmpresaBacana FROM coletaArduino;
 
 select concat(empresa, '      ', dtColeta) as 'Data de coleta da empresa'
     from coletaArduino
     WHERE empresa LIKE 'F%';
     
-select concat(empresa '    ', dtColeta),
+select concat(empresa, '    ', dtColeta) as 'Nome da Empresa',
 	case
-		when empresa like 'F%'
-        then 'começa com F'
-        end		
-as 'Data de coleta da empresa' from coletaArduino;
-
-DESC coletaArduino;
-
-INSERT INTO coletaArduino VALUES
-	(default,'Fish Company', 1,'2025-08-10 11:30:40', 29),
-	(default,'Peixes Co', 1,'2025-07-10 13:40:59', 19.5),
-	(default,'Filhos da Truta', 1,'2024-08-10 17:50:33', 15.3),
-	(default,'Kamehame Peixes', 1,'2023-01-15 22:22:16', 18.9),
-	(default,'Truta Olimpica', 1,'2021-08-30 23:10:31', 16),
-    (default,'Como pode um peixe', 1,'2025-08-03 15:10:12', 8),
-	(default,'Shark Powder', 1,'2025-06-19 15:10:12', 6.3);
-    
+		when empresa like 'F%' then 'começa com F'
+        else 'não é com F'
+        end as 'Data de coleta da empresa' from coletaArduino;
+        
 SELECT * FROM coletaArduino;
 
 SELECT CONCAT(tanque ,' ', temperatura) AS medidor FROM coletaArduino
@@ -173,7 +175,9 @@ SELECT tanque AS 'Número do tanque',
 	CONCAT(empresa,': O tanque ',tanque,' precisa de atenção. Temperatura em ',temperatura,' graus.') AS aviso
     FROM coletaArduino
     WHERE temperatura <10 OR temperatura>20;
-    
+
+-- ------------------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE tanque (
 	idTanque INT PRIMARY KEY AUTO_INCREMENT,
     empresa VARCHAR(50) NOT NULL,
