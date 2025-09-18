@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Troust Solutions</title>
+</head>
+<body>
+    <h1>Faça uma simulação!</h1>
+    <h4>Estime seus ganhos ao usar nossa solução.</h4>
+
+    <div> 
+        Qual é foi sua produção média no ano passado, em lotes de alevinos? <br>  <!--Coletar produção de alevinos-->
+        <input type="number" id="input_producao" placeholder="1 lote são 10 mil alevinos">
+    </div>
+    <div>
+        Qual foi a média, em kg, de cada indivíduo de sua produção? <br> <!--Coletar peso médio por truta-->
+        <input type="number" id="input_massa_ind" placeholder=" 4.2 kg">
+    </div>
+    <div>
+        Em média, qual a porcentagem (%) de perda de alevinos em sua produção anual passada? <br> <!--Coletar perdas ambientais-->
+        <input type="number" id="input_perdas_alevinos" placeholder="30.5">
+    </div>
+    <div>
+        Escreva seus ganhos, em reais, referentes à produção anual passada. <br> <!--Coletar ganhos para comparação-->
+        <input type="number" id="input_ganhos" placeholder="30000">
+    </div><br>
+    <button onclick="simular()">Simular</button> <br>
+    <br>
+    <div id="div_msg">Abaixo, vamos mostrar como nossa solução irá turbinar o seu negócio:</div>
+   
+</body>
+</html>
+
+<script>
+    var taxa_sobrevivencia = 10;
+    var aumento_biomassa = 25;
+
+    function simular(){
+        var producao = Number(input_producao.value)*10000;
+        var massa_ind = Number(input_massa_ind.value);
+        var perdas = Number(input_perdas_alevinos.value);
+        var ganhos = Number(input_ganhos.value);
+
+        var producao_sensor = (producao)*1.1;
+        var massa_ind_sensor = massa_ind*1.25;
+        var perdas_sensor = perdas*0.3;
+        var massa_sensor = massa_ind*1.25;
+        var ganhos_sensor = (ganhos / massa_ind)*massa_sensor;
+        var ganhos_qualidade = ganhos_sensor*1.5; //estimativa de 50% sobre a qualidade do produto 
+        div_msg.innerHTML += ` <br> <br> Nossa solução garante uma queda de <u>70% na morte de alevinos</u> devido a fatores ambientais. <br>
+                            Com o monitoramento, você tera a taxa de mortalidade reduzida de ${perdas}% para <b>${perdas_sensor}%</b>. <br>
+                            Portanto, sua produção passará de ${producao} para, aproximadamente, <b>${producao_sensor}</b> alevinos. <br>
+                            Achou pouco? <br>
+                            Vejamos: Com o aumento de ${producao_sensor - producao} indivíduos e um acréscimo de <u>25%</u> na massa, <br>
+                            Você irá produzir individuos com até ${massa_sensor} kg. <br>
+                            Isso equivale a um ganho de R$${ganhos_sensor}. <br>
+                            A qualidade do produto será influenciada, fazendo com que seu lucro possa evoluir até <b>R$${ganhos_qualidade}</b>. <br>
+                            <br>
+                            <div>
+                                <button onclick="direcionar()">Quero aumentar meus lucros</button>
+                            <div>`
+
+    };
+
+    function direcionar(){
+        //não sei como direcionar para outra página
+    }
+</script>

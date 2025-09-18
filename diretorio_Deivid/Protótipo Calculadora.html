@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<h1> Calculadora Financeira </h1>
+
+<br> Valor de cada peixe: <input type="number" id="input_valorpeixe">
+
+<br> <br> Totalidade de peixes: <input type="number" id="input_qtdpeixes">
+
+<br> <br> Perda de peixes (%): <input type="text" id="input_perda">
+
+<br> <br> Fase de criação: <input type="text" id="input_fase">
+
+<button onclick="calcFinanceira()"> Mostre minhas perdas! </button>
+
+<div id="diferença"></div>
+
+
+</body>
+</html>
+
+
+<script>
+
+function calcFinanceira(){
+
+    var valP = Number(input_valorpeixe.value)
+    var qtdP = Number(input_qtdpeixes.value)
+    var fase = (input_fase.value)
+    var porcPerda = Number(input_perda.value)
+
+    var calcTotal = valP * qtdP
+    var Real = calcTotal
+    var calcPerda =  (porcPerda / 100) * qtdP
+    
+    diferença.innerHTML += (`<br> Você está perdendo ${calcPerda}% dos seus peixes em fase ${fase}! :( <br> <br> Com nossa solução, você ganhará transformará sua perda de lucros em ganhos! 
+    Ou seja, terá ganhos integrais de R$${calcTotal}.`)
+
+
+}
+
+</script>

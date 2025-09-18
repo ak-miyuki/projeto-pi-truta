@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculdora Troust Solution</title>
+</head>
+<body>
+    <h2>Calcule quanto você pode ganhar com a venda de Trutas Arco-íris!</h2> <br>
+    
+    Quantidade de quilogramas vendidas: <br> <br>
+    <input id="input_venda" type="text"></input> 
+ 
+    <button onclick="calcular()"> Calcular </button>
+
+    <br><br> <i>Valor atual da venda da quilograma de Truta Arco-íris: R$7,50.</i>  <br><br>
+    <div id="div_mensagem"></div> <br> <br> 
+
+    <p>Com o nosso sensor de temperatura você terá muito mais vendas ao final do mês! <br>
+        Com ele terá acesso a gráficos e relatórios sobre as temperaturas de seus tanques, tendo muito mais de controle
+        sobre seu cultivo. <br><br>
+        <button onclick="compreja()"><h4>Compre já nosso produto!</h4></button>
+    </p>
+<br>
+</body>
+</html>
+
+<script>
+    var valorkg = 7.50
+    
+     function calcular () {
+        var venda = Number(input_venda.value)
+        div_mensagem.innerHTML = ` Com a venda de ${venda}kg você irá faturar R$${venda*valorkg}!`
+
+     }
+
+     function compreja() {
+        alert ('Você será redirecionado para nossa página de produtos!')
+     }
+
+</script>

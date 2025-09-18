@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    Quantidade de peixes por tanque
+    <input type="number" id="input_qtdPeixe"> <br>
+
+    Preço do peixe 
+    <input type="number" id="input_precoPeixe"> <br>
+
+    Preço da alimentação do peixe
+    <input type="number" id="input_alimentacaoPeixe"> <br>
+
+    Quantidade de peixes vendidos
+    <input type="number" id="input_peixesVendidos"> <br>
+
+    Quantidade de peixes perdidos
+    <input type="number" id="input_peixesPerdidos"> <br>
+
+    Temperatura ideal para a sobrevivência do peixe
+    <input type="number" id="input_temperaturaPeixeVivo"> <br>
+
+
+    <br> <br>
+    
+    <button onclick="calcular()">Calcular</button>
+    
+    <br> <br>
+
+    <div id="div_mensagem"></div>
+
+</body>
+</html>
+
+<script>
+
+// variavel globa
+var perdasAdicionais = 0
+
+function calcular(){
+    // Pegando os valores
+    var qtdPeixe = Number(input_qtdPeixe.value)
+    var precoPeixe = Number(input_precoPeixe.value)
+    var alimentacaoPeixe = Number(input_alimentacaoPeixe.value)
+    var peixesVendidos = Number(input_peixesVendidos.value)
+    var peixesPerdidos = Number(input_peixesPerdidos.value)
+    var temperaturaAgua = Number(input_temperaturaPeixeVivo.value)
+
+    // Cálculos principais
+    var lucroPeixe = peixesVendidos * precoPeixe
+
+    var custoAlimentacao = qtdPeixe * alimentacaoPeixe
+    
+    var prejuizoPeixeMorto = peixesPerdidos * precoPeixe
+    
+    if (temperaturaAgua < 10){
+        perdasAdicionais = qtdPeixe * 0.05 //tem chance de ocorrer perdas de 8% (valor de exemplo. Como a truta é de água fria, então, abaixo de 10°C, dixa o animal em uma situação perigosa onde ele pode morrer, então , coloquei um valor baixo de 5% pra usar como exemplo)
+    }   
+    
+    if (temperaturaAgua >= 10 && temperaturaAgua <= 18){ // && significa que só vai retornar como verdadeiro, somente se todas as condições forem verdadeiras
+        perdasAdicionais = 0 // Não tem chance de ocorrer perdas, já que a água tá na tempetarua ideal
+    }
+    
+    if (temperaturaAgua > 18 && temperaturaAgua <= 20){
+        perdasAdicionais = qtdPeixe * 0.15 //tem chance de ocorrer perdas de 15% (valor de exemplo. A água aumenteou de temperatura, tá perto de uma situação crítica, então usei 15%, não aumentendo muito, mas, já deixando preocupante)
+    }
+    
+    if (temperaturaAgua > 20){
+        perdasAdicionais = qtdPeixe * 0.20 //tem chance de ocorrer perdas de 30% (valor de exemplo. Já tá quente de mais pro animal sobreviver, então, usei a temperatura da água como porcentagem para o cálculo)
+    }
+
+
+
+    var lucroTotal = lucroPeixe - custoAlimentacao - prejuizoPeixeMorto
+
+
+    div_mensagem.innerHTML= `
+        Resumo da Produção:<br>
+
+        Receita: R$ ${lucroPeixe} <br>
+
+        Custo com alimentação: R$ ${custoAlimentacao} <br>
+
+        Prejuízo com perdas: R$ ${prejuizoPeixeMorto} <br>
+
+        Lucro Final: R$ ${lucroTotal} <br>
+    `
+}
+</script>

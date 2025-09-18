@@ -1,0 +1,115 @@
+<!-- 
+----------------------------- Calculadora Financeira INDIVIDUAL -----------------------------
+
+                            Andreia Miyuki Kubota - RA: 04252014
+
+---------------------------------------------------------------------------------------------                            
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira - Truticultura</title>
+</head>
+<body>
+    
+    <div>
+        <h1>
+            <b>
+                Calculadora Financeira Individual - TRUTICULTURA
+            </b>
+        </h1>
+        <h3>
+            <i>
+                Andréia Miyuki Kubota - RA: 04252014
+            </i>
+        </h3>
+    </div>
+
+<br>
+
+    <div>
+        Insira a quantidade de ALEVINOS (filhotes de peixes):
+        <input id="input_quantidade" type="text" placeholder="e.g. 10000">
+    </div>
+
+    <div>
+        Insira a massa média dos peixes na venda (peso médio):
+        <input id="input_massa" type="text" placeholder="e.g. 300"> g
+    </div>
+
+    <div>
+        Insira o valor de venda do kg do peixe:
+        <input id="input_valor" type="text" placeholder="e.g. 20.50"> reais
+    </div>
+
+<br>
+
+    <div>
+        <button id="button_calcular" onclick="calcular()"> Simular receita <b>SEM e COM controle de temperatura</b> </button>
+        
+        <button id="button_limpar" onclick="limpar()">Limpar</button>
+    </div>
+
+<br>
+
+    <div id="div_mensagem">Vamos descobrir a diferença que o <b>CONTROLE DE TEMPERATURA</b> da água dos tanques faz na Truticultura.</div>
+
+
+</body>
+</html>
+
+<script>
+    var sobreviveSem = 0.05;
+    var sobreviveCom = 0.7;
+    var aumentoMassaCom = 1 + 0.25;
+
+    function calcular() {
+        var quantidade = Number(input_quantidade.value); 
+        var massa = Number(input_massa.value); 
+        var valorG = Number(input_valor.value) /1000; 
+        var biomassaSem = massa * quantidade;
+        var qtSem = quantidade * sobreviveSem;
+        var receitaSem = qtSem * massa * valorG;
+        var massaCom = massa * aumentoMassaCom;
+        var biomassaCom = massaCom * quantidade;
+        var qtCom = quantidade * sobreviveCom;
+        var receitaCom = qtCom * massaCom * valorG;
+        var qtDiferenca = qtCom - qtSem;
+        var massaDiferencaKg = (biomassaCom - biomassaSem) /1000;
+        var receitaDiferenca = receitaCom - receitaSem;
+
+            
+        div_mensagem.innerHTML = `
+        ------------------------------------------------------------------ <br>
+           <b><i>SEM Monitoramento:</i></b> <br>
+           Sobrevivem: <b>${qtSem.toFixed(0)}</b> trutas até a fase de venda <br>
+           Cada uma pesa em média: <b>${massa} g</b> <br>
+           Receita: <b>R$ ${receitaSem.toFixed(2)}</b> <br>
+        ------------------------------------------------------------------<br>`
+
+        div_mensagem.innerHTML += `
+        ------------------------------------------------------------------ <br>
+           <b><i>COM Monitoramento:</i></b> <br>
+           Sobrevivem: <b>${qtCom.toFixed(0)}</b> trutas até a fase de venda <br>
+           Cada uma pesa em média: <b>${massaCom} g</b> <br>
+           Receita: <b>R$ ${receitaCom.toFixed(2)}</b> <br>
+        ------------------------------------------------------------------<br>`
+
+        div_mensagem.innerHTML += `
+        ------------------------------------------------------------------ <br>
+           <b><i>PORQUE MONITORAR:</i></b> <br>
+           Sobrevivem: <b>${qtDiferenca.toFixed(0)}</b> trutas a mais até a fase de venda <br>
+           Biomassa: <b>${massaDiferencaKg} kg</b> a mais para venda <br>
+           Receita: <b>R$ ${receitaDiferenca.toFixed(2)}</b> a mais <br>
+        ------------------------------------------------------------------<br>`
+
+    }
+
+    function limpar() {
+        div_mensagem.innerHTML = ``
+    }
+
+</script>
